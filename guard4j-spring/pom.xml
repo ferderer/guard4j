@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <parent>
+        <groupId>de.ferderer.guard4j</groupId>
+        <artifactId>guard4j-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>guard4j-spring-boot-starter</artifactId>
+    <name>Guard4j Spring Boot Starter</name>
+    <description>Spring Boot integration for Guard4j error handling</description>
+
+    <modelVersion>4.0.0</modelVersion>
+</project>

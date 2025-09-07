@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <artifactId>guard4j-api</artifactId>
+    <name>Guard4j API</name>
+    <description>Framework-agnostic error handling and observability core</description>
+
+    <parent>
+        <groupId>de.ferderer.guard4j</groupId>
+        <artifactId>guard4j-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+</project>
