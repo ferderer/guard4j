@@ -1,49 +1,52 @@
 package de.ferderer.guard4j.observability;
 
-import de.ferderer.guard4j.classification.Level;
 import java.time.Instant;
 
 /**
  * Base interface for all events that generate observability data.
  *
- * <p>ObservableEvent provides a unified contract for events that can be
- * processed by observability systems. All events must provide their type,
- * logging level, and metrics configuration.
+ * <p>ObservableEvent provides a simplified contract for events in the new Emitter pattern.
+ * Events only need to provide their type and optional metric value, while the logging
+ * level is determined by the emitter method used (trace, debug, info, warn, error).
  *
  * <p>Context information (user ID, request details, etc.) is handled by
  * the {@link ObservabilityProcessor} implementations, not by the events themselves.
  *
- * @since 1.0.0
+ * @since 2.0.0
  */
 public interface ObservableEvent {
 
     /**
      * Returns the event type identifier.
-     * This uniquely identifies what kind of event this is.
+     *
+     * <p>Default implementation derives the type from the class name,
+     * converting from CamelCase to kebab-case (e.g., PaymentProcessedEvent -> payment-processed-event).
      *
      * @return the event type identifier, never null
      */
-    String eventType();
+    default String eventType() {
+        return getClass().getSimpleName()
+            .replaceAll("([a-z])([A-Z])", "$1-$2")
+            .toLowerCase();
+    }
 
     /**
-     * Returns the level for logging and alerting.
-     * This determines how the event should be logged and monitored.
+     * Returns the metric value for this event.
      *
-     * @return the level for this event, never null
-     */
-    Level level();
-
-    /**
-     * Returns whether this event should generate metrics.
-     * Controls whether the event is sent to metrics collection systems.
+     * <p>Default implementation returns 1, which represents a simple event count.
+     * Events can override this to provide custom metric values (e.g., payment amounts,
+     * processing times, etc.).
      *
-     * @return true if metrics should be collected for this event
+     * @return the metric value, typically 1 for simple counting
      */
-    boolean hasMetrics();
+    default int metric() {
+        return 1;
+    }
 
     /**
      * Returns when this event occurred.
-     * Default implementation returns the current time.
+     *
+     * <p>Default implementation returns the current time.
      *
      * @return the event timestamp, never null
      */
