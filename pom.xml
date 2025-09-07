@@ -15,6 +15,7 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <argLine></argLine>
     </properties>
 
     <modules>
@@ -70,8 +71,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.5.3</version>
                     <configuration>
-                        <parallel>methods</parallel>
-                        <threadCount>4</threadCount>
                         <excludes>
                             <exclude>**/*IT.java</exclude>
                         </excludes>
