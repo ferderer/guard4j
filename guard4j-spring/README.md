@@ -11,6 +11,7 @@ A Spring Boot starter that provides seamless integration of Guard4j error handli
 - 🔄 **Exception Mapping**: Automatic mapping of Spring exceptions to Guard4j errors
 - 🎯 **Conditional Activation**: Features activate based on classpath presence
 - 🧪 **Test Friendly**: Easy to disable for testing scenarios
+- 💼 **Business KPI Support**: Event-based metrics for business intelligence and real-time dashboards
 
 ## Quick Start
 
@@ -29,24 +30,39 @@ A Spring Boot starter that provides seamless integration of Guard4j error handli
 ```java
 @RestController
 public class UserController {
+    private static final Emitter events = Guard4j.getEmitter(UserController.class);
 
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable Long id) {
+        events.info(new UserRequestedEvent(id));
+
         if (id <= 0) {
+            events.warn(new InvalidUserIdEvent(id));
             throw new AppException(SpringError.SPRING_VALIDATION_FAILED,
                 "User ID must be positive");
         }
 
         User user = userService.findById(id);
         if (user == null) {
+            events.warn(new UserNotFoundEvent(id));
             throw new AppException(SpringError.SPRING_DATA_NOT_FOUND,
                 "User not found with ID: " + id);
         }
 
+        events.info(new UserRetrievedEvent(user.getId(), user.getStatus()));
         return user;
     }
 }
+
+// Simple event definitions
+public record UserRequestedEvent(Long userId) implements ObservableEvent {}
+public record UserRetrievedEvent(Long userId, String status) implements ObservableEvent {}
+public record UserNotFoundEvent(Long userId) implements ObservableEvent {}
 ```
+
+**Automatic Output:**
+- **Metrics**: `guard4j_user_retrieved_total{status="active"}`, `guard4j_user_not_found_total`
+- **Logs**: Structured JSON with correlation IDs and business context
 
 ### 3. Automatic Error Responses
 

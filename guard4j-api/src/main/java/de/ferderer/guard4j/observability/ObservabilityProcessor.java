@@ -33,4 +33,17 @@ public interface ObservabilityProcessor {
     default CompletableFuture<Void> processAsync(ObservableEvent event) {
         return CompletableFuture.runAsync(() -> process(event));
     }
+    
+    /**
+     * Set the context extractor for enriching events with context information.
+     * 
+     * <p>When a context extractor is set, the processor should use it to
+     * extract context information and include it in observability data.
+     * 
+     * @param contextExtractor the context extractor to use, or null to disable context extraction
+     * @since 2.1.0
+     */
+    default void setContextExtractor(ContextExtractor contextExtractor) {
+        // Default implementation does nothing for backward compatibility
+    }
 }

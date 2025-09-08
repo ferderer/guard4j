@@ -1,0 +1,121 @@
+{
+  "groups": [
+    {
+      "name": "guard4j",
+      "type": "de.ferderer.guard4j.spring.autoconfigure.Guard4jProperties",
+      "description": "Configuration properties for Guard4j Spring Boot integration."
+    },
+    {
+      "name": "guard4j.observability",
+      "type": "de.ferderer.guard4j.spring.autoconfigure.Guard4jProperties$Observability",
+      "description": "Observability settings for Guard4j error handling."
+    },
+    {
+      "name": "guard4j.web",
+      "type": "de.ferderer.guard4j.spring.autoconfigure.Guard4jProperties$Web",
+      "description": "Web-specific settings for Guard4j error handling."
+    }
+  ],
+  "properties": [
+    {
+      "name": "guard4j.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable or disable Guard4j auto-configuration."
+    },
+    {
+      "name": "guard4j.exception-mapping.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable automatic mapping of Spring exceptions to Guard4j errors."
+    },
+    {
+      "name": "guard4j.observability.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Enable observability features such as metrics and tracing for error handling."
+    },
+    {
+      "name": "guard4j.observability.metrics.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable metrics collection for error events when observability is enabled."
+    },
+    {
+      "name": "guard4j.observability.tracing.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable tracing for error events when observability is enabled."
+    },
+    {
+      "name": "guard4j.observability.level-overrides",
+      "type": "java.util.Map<java.lang.String,de.ferderer.guard4j.classification.Level>",
+      "description": "Override default log levels for specific error codes. Key is the error code, value is the desired level."
+    },
+    {
+      "name": "guard4j.web.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable web-specific error handling features when Spring Web is present."
+    },
+    {
+      "name": "guard4j.web.global-exception-handler.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Enable the global exception handler for web requests."
+    },
+    {
+      "name": "guard4j.web.global-exception-handler.order",
+      "type": "java.lang.Integer",
+      "defaultValue": 1000,
+      "description": "Order of the global exception handler. Lower values have higher precedence."
+    },
+    {
+      "name": "guard4j.web.include-stack-trace",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Include stack traces in error responses. Should be disabled in production."
+    },
+    {
+      "name": "guard4j.web.include-path",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Include the request path in error responses."
+    }
+  ],
+  "hints": [
+    {
+      "name": "guard4j.observability.level-overrides.keys",
+      "values": [
+        {
+          "value": "SPRING_AUTHENTICATION_FAILED",
+          "description": "Authentication failure error code"
+        },
+        {
+          "value": "SPRING_ACCESS_DENIED",
+          "description": "Access denied error code"
+        },
+        {
+          "value": "SPRING_VALIDATION_FAILED",
+          "description": "Validation failure error code"
+        },
+        {
+          "value": "SPRING_DATA_NOT_FOUND",
+          "description": "Data not found error code"
+        },
+        {
+          "value": "SPRING_CONSTRAINT_VIOLATION",
+          "description": "Database constraint violation error code"
+        }
+      ]
+    },
+    {
+      "name": "guard4j.observability.level-overrides.values",
+      "providers": [
+        {
+          "name": "any"
+        }
+      ]
+    }
+  ]
+}

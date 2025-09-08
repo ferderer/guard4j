@@ -1,0 +1,66 @@
+# Guard4j Spring Boot Starter Configuration
+# ==========================================
+
+# Main Guard4j Configuration
+# --------------------------
+# Enable/disable Guard4j (default: true)
+guard4j.enabled=true
+
+# Exception Mapping Configuration
+# ------------------------------
+# Enable automatic mapping of Spring exceptions (default: true)
+guard4j.exception-mapping.enabled=true
+
+# Observability Configuration
+# ---------------------------
+# Enable observability features (default: false)
+guard4j.observability.enabled=false
+
+# Enable metrics when observability is enabled (default: true)
+guard4j.observability.metrics.enabled=true
+
+# Enable tracing when observability is enabled (default: true)
+guard4j.observability.tracing.enabled=true
+
+# Override log levels for specific error codes
+# guard4j.observability.level-overrides.SPRING_AUTHENTICATION_FAILED=WARN
+# guard4j.observability.level-overrides.SPRING_ACCESS_DENIED=ERROR
+# guard4j.observability.level-overrides.SPRING_VALIDATION_FAILED=INFO
+
+# Web Configuration
+# ----------------
+# Enable web-specific features when Spring Web is present (default: true)
+guard4j.web.enabled=true
+
+# Enable global exception handler (default: true)
+guard4j.web.global-exception-handler.enabled=true
+
+# Order of exception handler - lower values have higher precedence (default: 1000)
+guard4j.web.global-exception-handler.order=1000
+
+# Include stack traces in error responses - disable in production (default: false)
+guard4j.web.include-stack-trace=false
+
+# Include request path in error responses (default: true)
+guard4j.web.include-path=true
+
+# Example Configuration for Different Environments
+# ================================================
+
+# Development Environment
+# -----------------------
+# guard4j.web.include-stack-trace=true
+# guard4j.observability.enabled=true
+# guard4j.observability.level-overrides.SPRING_VALIDATION_FAILED=DEBUG
+
+# Production Environment
+# ----------------------
+# guard4j.web.include-stack-trace=false
+# guard4j.observability.enabled=true
+# guard4j.observability.metrics.enabled=true
+# guard4j.observability.tracing.enabled=false
+
+# Testing Environment
+# -------------------
+# guard4j.web.global-exception-handler.enabled=false
+# guard4j.observability.enabled=false

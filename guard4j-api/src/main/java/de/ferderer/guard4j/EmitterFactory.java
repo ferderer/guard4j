@@ -1,8 +1,8 @@
 package de.ferderer.guard4j;
 
 import de.ferderer.guard4j.observability.ObservabilityProcessor;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Factory for creating and managing Emitter instances.
@@ -20,7 +20,7 @@ import java.util.Map;
 public class EmitterFactory {
 
     private static final Map<String, Emitter> emitterCache = new ConcurrentHashMap<>();
-    static volatile ObservabilityProcessor processor;
+    static ObservabilityProcessor processor;
 
     /**
      * Private constructor to prevent instantiation.
