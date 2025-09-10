@@ -1,5 +1,5 @@
 # Guard4j
-***– "The best code is business-readable code. Guard4j events describe what happens in your domain, not how you measure it."***
+*– Guard4j events describe what happens in your domain, not how you measure it.*
 
 Production-grade error handling and observability for Java applications. Framework-agnostic core with seamless Spring Boot, Quarkus, and Micronaut integration.
 
